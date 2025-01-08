@@ -11,14 +11,14 @@ class EstabelecimentoController {
         }
     }
 
-    static async listaEstabelecimentoPorNome (req, res) {
+    static async listaEstabelecimentoPorId (req, res) {
 
         try {
-            const nome = req.params.nome
-            const estabelecimentoEncontrado = await estabelecimento.findOne(nome)
+            const id = req.params.id
+            const estabelecimentoEncontrado = await estabelecimento.findById(id)
             res.status(200).json(estabelecimentoEncontrado)
         } catch (erro) {
-            res.status(500).json({ message: `${erro.message} - falha na requisição do livro` })
+            res.status(500).json({ message: `${erro.message} - falha na requisição do estabelecimento` })
         }
     }
    
@@ -28,15 +28,15 @@ class EstabelecimentoController {
             const novoEstabelecimento = await estabelecimento.create(req.body)
             res.status(201).json({ message: "Criado com sucesso", estabelecimento: novoEstabelecimento})
         } catch (erro) {
-            res.status(500).json({ message: `${erro.message} - falha ao cadastrar livro` })
+            res.status(500).json({ message: `${erro.message} - falha ao cadastrar estabelecimento` })
         }
     }
 
     static async atualizarEstabelecimento (req, res) {
 
         try {
-            const nome = req.params.nome
-            await estabelecimento.updateOne({nome}, req.body)
+            const id = req.params.id
+            await estabelecimento.findByIdAndUpdate(id, req.body)
             res.status(200).json({ message : "Estabelecimento atualizado!"})
         } catch (erro) {
             res.status(500).json({ message: `${erro.message} - falha na atualização` })
@@ -46,8 +46,8 @@ class EstabelecimentoController {
     static async excluirEstabelecimento (req, res) {
 
         try {
-            const nome = req.params.nome
-            await estabelecimento.deleteOne({nome})
+            const id = req.params.id
+            await estabelecimento.findByIdAndDelete(id)
             res.status(200).json({ message : "Estabelecimento excluído com sucesso!"})
         } catch (erro) {
             res.status(500).json({ message: `${erro.message} - falha na exclusão` })

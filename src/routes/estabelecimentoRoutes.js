@@ -4,7 +4,7 @@ import EstabelecimentoController from "../controllers/estabelecimentoController.
 const routes = express.Router()
 
 routes.get("/estabelecimento", EstabelecimentoController.listarEstabelecimentos)
-routes.get("/estabelecimento/:nome", EstabelecimentoController.listaEstabelecimentoPorNome)
+routes.get("/estabelecimento/:id", EstabelecimentoController.listaEstabelecimentoPorId)
 routes.post("/estabelecimento", EstabelecimentoController.cadastrarEstabelecimento)
 routes.put("/estabelecimento/:nome", EstabelecimentoController.atualizarEstabelecimento)
 routes.delete("/estabelecimento/:nome", EstabelecimentoController.excluirEstabelecimento)
