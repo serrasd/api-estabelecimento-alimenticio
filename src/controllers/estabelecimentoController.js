@@ -36,7 +36,7 @@ class EstabelecimentoController {
 
         try {
             const id = req.params.id
-            await estabelecimento.findByIdAndUpdate(id, req.body)
+            await estabelecimento.findOneAndUpdate(id, req.body)
             res.status(200).json({ message : "Estabelecimento atualizado!"})
         } catch (erro) {
             res.status(500).json({ message: `${erro.message} - falha na atualização` })
