@@ -14,8 +14,8 @@ class EstabelecimentoController {
     static async listaEstabelecimentoPorId (req, res) {
 
         try {
-            const id = req.params.id
-            const estabelecimentoEncontrado = await estabelecimento.findById(id)
+            const id = req.params.cnpj
+            const estabelecimentoEncontrado = await estabelecimento.findOne({"cnpj": id})
             res.status(200).json(estabelecimentoEncontrado)
         } catch (erro) {
             res.status(500).json({ message: `${erro.message} - falha na requisição do estabelecimento` })
@@ -35,8 +35,8 @@ class EstabelecimentoController {
     static async atualizarEstabelecimento (req, res) {
 
         try {
-            const id = req.params.id
-            await estabelecimento.findOneAndUpdate(id, req.body)
+            const id = req.params.cnpj
+            await estabelecimento.findOneAndUpdate({"cnpj": id}, req.body)
             res.status(200).json({ message : "Estabelecimento atualizado!"})
         } catch (erro) {
             res.status(500).json({ message: `${erro.message} - falha na atualização` })
@@ -46,8 +46,8 @@ class EstabelecimentoController {
     static async excluirEstabelecimento (req, res) {
 
         try {
-            const id = req.params.id
-            await estabelecimento.findByIdAndDelete(id)
+            const id = req.params.cnpj
+            await estabelecimento.findOneAndDelete({"cnpj": id})
             res.status(200).json({ message : "Estabelecimento excluído com sucesso!"})
         } catch (erro) {
             res.status(500).json({ message: `${erro.message} - falha na exclusão` })
